@@ -14,14 +14,24 @@ const HomePage = () => {
     const [category, setCategory] = useState([])
     const [backImg, setBackImg] = useState('')
 
+    const [images, setImage] = useState({});
+
+
+
     async function getData() {
         try {
-            let res = await request.get('post/lastone')
-            setData([res.data]);
-            setBackImg(`https://blog-backend-production-a0a8.up.railway.app/upload/${res.data.photo._id}.${res.data.photo.name.slice(-3)}`)
+            let { data } = await request.get('post/lastone')
+            setData([data]);
+            setBackImg(`https://blog-backend-production-a0a8.up.railway.app/upload/${data.photo._id}${data.photo.name.split('.')[1]}`)
         } catch (error) {
             toast.error("Image Not Found");
         }
+    }
+    const putdeafaultimg = (data) => {
+        setImage((response) => ({
+            ...response,
+            [data]: true,
+        }))
     }
     async function getPosts() {
         try {
@@ -38,12 +48,14 @@ const HomePage = () => {
         } catch (error) {
             toast.error("No Category");
         }
+        console.log(category);
     }
     useEffect(() => {
         getData();
         getPosts();
         getCategory();
     }, []);
+
     const responsive = {
         desktop: {
             breakpoint: { max: 3000, min: 1024 },
@@ -61,18 +73,22 @@ const HomePage = () => {
             partialVisibilityGutter: 30,
         },
     };
-    console.log(category);
     return (
         <Fragment>
             <div className={style["main__wrapper"]}>
                 <div className="back__img">
-                    <img className={style["backimg"]} src={backImg} alt={backImg.name} />
+                    <img className={style["backimg"]}
+                        onError={() => putdeafaultimg(data._id)}
+                        src={
+                            images[data._id]
+                                ? "https://wallpaperaccess.com/full/13189.jpg"
+                                : backImg} />
                 </div>
                 {data.map((el) => (
                     <div key={el._id} className="container">
                         <div className={style["wrapper"]}>
                             <h6 className={style['wrapper__h6']}>Posted on <span className={style['h6__span']}>{el.category.name}</span></h6>
-                            <h1 className={style['wrapper__heading']}>{el.category.name}, {el.category.description}</h1>
+                            <h1 className={style['wrapper__heading']}>{el.category.name}, {el.category.description.slice(0, 50)}</h1>
                             <h5 className={style['wrapper__span']}>By <span className={style['name']}>{el.user.first_name} {el.user.last_name}</span> | {new Date(el.category.updatedAt).toLocaleDateString(
                                 undefined,
                                 {
@@ -106,17 +122,27 @@ const HomePage = () => {
                     </div>
                 </div>
             </section>
-            <hr  className={style['hr']}/>
+            <hr className={style['hr']} />
             <section className={style['categorysection']}>
-                <h1 className={style['heading__category']}>Choose A Catagory</h1>
+                <h1 className={style['heading__category']}>Choose A Category</h1>
                 <div className="container">
-                    <div className="category__cards">
-                        {category.map((categories) => {
-                            <CategoryCard key={categories._id} categories={categories} />
-                        })}
+                    <div className={style["category__cards"]}>
+                        <Carousel
+                            responsive={responsive}
+                            showDots={false}
+                            infinite={true}
+                            autoPlay={false}
+                            autoPlaySpeed={100}
+                            keyBoardControl={true}
+                        >
+                            {category.map((category) => (
+                                <CategoryCard key={category._id} category={category} />
+                            ))}
+                        </Carousel>
                     </div>
                 </div>
             </section>
+
         </Fragment>
     )
 }

@@ -4,7 +4,8 @@
 
 .cards__img {
     max-width: 405px;
-    max-height: 318px;
+    height: 200px;
+    width: 100%;
 }
 
 .item__text-h6 {

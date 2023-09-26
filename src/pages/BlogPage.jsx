@@ -5,33 +5,52 @@ import request from "../api";
 import style from './BlogPage.module.css'
 
 const BlogPage = () => {
-    const { blogid } = useParams()
-    const [data, setData] = useState([]);
 
-    const getData = async () => {
-        try {
-            const res = await request.get("post/" + blogid); // "id" o'rniga "blogid" ishlatilgan
-            setData([res.data]);
-        } catch (error) {
-            toast.error("Server error");
-        }
-    };
+    const { blogid } = useParams();
+    console.log(blogid);
+    const [data, setData] = useState([]);
+    const [images, setImage] = useState({});
+
+
 
     useEffect(() => {
-        getData();
-    }, []);
+        const fetchData = async () => {
+            try {
+                const res = await request.get("post/" + blogid);
+                setData([res.data]);
+            } catch (error) {
+                toast.error("Server error");
+            }
+        };
 
+        fetchData();
+
+    }, [blogid]);
+    const putdeafaultimg = (post) => {
+        setImage((response) => ({
+            ...response,
+            [post]: true,
+        }))
+    }
     return (
         <div className="container">
             {data.map((post) => (
                 <div className={style["wrapper"]} key={post._id}>
                     <div className={style["wrapper__image"]}>
-                        <img src={`https://blog-backend-production-a0a8.up.railway.app/upload/${post.photo._id}.jpg`} />
+                        <img
+                            onError={() => putdeafaultimg(post._id)}
+                            src={images[post._id]
+                                ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYIzC1TfBqf3794q-lLfmxfhCr_Q4ElPV9ZQ&usqp=CAU"
+                                : `https://blog-backend-production-a0a8.up.railway.app/upload/${post.photo._id}.${post.photo.name.slice(-3)}`} />
                     </div>
                     <div className={style["wrapper__texts"]}>
                         <div className={style["texts__profile"]}>
                             <div className={style["profile__img"]}>
-                                <img className={style['profile__img']} src={`https://blog-backend-production-a0a8.up.railway.app/upload/${post.user.photo}`} />
+                                <img className={style['profile__img']}
+                                    onError={() => putdeafaultimg(post._id)}
+                                    src={images[post._id]
+                                        ? 'https://m0.her.ie/wp-content/uploads/2018/01/07093633/GettyImages-887815620.jpg'
+                                        : `https://blog-backend-production-a0a8.up.railway.app/upload/${post.user.photo}`} />
                             </div>
                             <div className={style["profile__text"]}>
                                 <h2>{post.user.first_name} {post.user.last_name}</h2>
