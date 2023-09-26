@@ -1,0 +1,172 @@
+.main__wrapper {
+  background: var(--Black, #232536);
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar__links {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 50%;
+}
+
+.navlink-inner {
+  gap: 10px;
+}
+
+.login__btn {
+  margin-left: 60px;
+  background: var(--Light, #FFF);
+  padding: 12px 38px;
+  color: var(--Black, #232536);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+  transition: 0.3s;
+  border: 3px solid var(--Light, #FFF);
+}
+
+.login__btn:hover {
+  background: var(--Black, #232536);
+  color: #FFF;
+  border: 3px solid var(--Light, #FFF);
+  transition: 0.3s;
+}
+
+.logo {
+  max-height: 40px;
+}
+
+.navlink {
+  margin-right: 25px;
+  width: 1000px;
+  height: 50px;
+  position: relative;
+  background: transparent;
+  cursor: pointer;
+  text-align: center;
+  line-height: 50px;
+  font-size: 16px;
+  border: none;
+  color: white;
+  overflow: hidden;
+}
+
+.navlink::before {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #7cce83;
+  transition: all 0.5s ease;
+}
+
+.navlink:hover::before {
+  width: 100%;
+  left: 0;
+}
+
+/* //mobile */
+
+.burger-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.burger-menu {
+  background: gray;
+  position: absolute;
+  top: 83px;
+  right: 0;
+  width: 100%;
+  padding: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.burger-menu .navlink {
+  padding: 15px;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.burger-menu .navlink:hover {
+  background-color: #555;
+}
+
+@media (max-width: 1000px) {
+  .navbar__links {
+    width: 60%;
+  }
+}
+
+@media (max-width: 850px) {
+  .navbar__links {
+    width: 65%;
+  }
+}
+
+@media (max-width: 800px) {
+  .navbar__links {
+    width: 70%;
+  }
+
+  .login__btn {
+    margin-left: 50px;
+    padding: 10px 25px;
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 700px) {
+  .navbar__links {
+    width: 70%;
+  }
+
+  .login__btn {
+    margin-left: 50px;
+    padding: 10px 25px;
+    font-size: 17px;
+  }
+}
+
+.mobile {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .mobile {
+    display: block;
+  }
+
+  .desktop {
+    display: none;
+  }
+
+  .navbar__links {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 10%;
+  }
+}
+
+@media (max-width: 600px) {
+  
+}
