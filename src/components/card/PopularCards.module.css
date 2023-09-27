@@ -1,5 +1,7 @@
 .popular__wrapper {
     margin-top: 64px;
+    text-decoration: none;
+    color: #232536;
 }
 
 .cards__img {

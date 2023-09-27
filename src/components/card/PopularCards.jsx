@@ -1,10 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import style from './PopularCards.module.css';
-
-function transitToBlog(id) {
-    window.location.href = '/blog/' + id
-}
 
 const PopularCards = ({ post }) => {
     const [images, setImage] = useState({});
@@ -17,11 +14,11 @@ const PopularCards = ({ post }) => {
         }))
     }
     return (
-        <div onClick={() => transitToBlog(post._id)} className={style["popular__wrapper"]}>
+        <Link to={'/blog/' + post._id} className={style["popular__wrapper"]}>
             <div className={style["popular__cards-item"]}>
                 <div className={style["cards__item-img"]}>
                     <img className={style['cards__img']}
-                    onError={() => putdeafaultimg(post._id)}
+                        onError={() => putdeafaultimg(post._id)}
                         src={images[post._id]
                             ? "https://images.unsplash.com/photo-1574169207511-e21a21c8075a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGltYWdlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"
                             : `https://blog-backend-production-a0a8.up.railway.app/upload/${post.photo._id}.${post.photo.name.slice(-3)}`} />
@@ -46,7 +43,7 @@ const PopularCards = ({ post }) => {
 
                 </div>
             </div>
-        </div>
+        </Link>
     );
 };
 
