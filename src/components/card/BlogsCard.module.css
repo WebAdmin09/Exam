@@ -1,0 +1,80 @@
+.post__card {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    column-gap: 30px;
+    margin-bottom: 40px;
+}
+
+.post__card-img {
+    max-width: 450px;
+    max-height: 318px;
+}
+
+.card__span {
+    color: var(--Purple, #592EA9);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.card__h2 {
+    color: var(--Black, #232536);
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 48px;
+    letter-spacing: -2px;
+}
+
+.card__title {
+    color: var(--Medium-grey, #6D6E76);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px;
+    max-width: 700px;
+}
+
+@media (max-width: 800px) {
+    .post__card-img {
+        max-width: 350px;
+        max-height: 400px;
+        height: 100%;
+    }
+}
+
+@media (max-width: 700px) {
+    .post__card {
+        flex-direction: column;
+    }
+
+    .card__title {
+        max-width: 500px;
+    }
+
+    .post__card-texts {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    .post__card-img{
+        max-width: 500px;
+        max-height: 315px;
+    }
+}
+@media (max-width: 510px) {
+    .post__card-img{
+        max-width: 350px;
+    }
+}
+@media (max-width: 370px) {
+    .post__card-img{
+        max-width: 300px;
+    }
+}

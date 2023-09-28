@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import style from './HomePage.module.css'
+import 'react-toastify/dist/ReactToastify.css';
 import CategoryCard from "../components/card/CategoryCard";
 
 const HomePage = () => {
@@ -23,6 +24,7 @@ const HomePage = () => {
             let { data } = await request.get('post/lastone')
             setData([data]);
             setBackImg(`https://blog-backend-production-a0a8.up.railway.app/upload/${data.photo._id}${data.photo.name.split('.')[1]}`)
+            toast.success('Success')
         } catch (error) {
             toast.error("Image Not Found");
         }
@@ -43,8 +45,8 @@ const HomePage = () => {
     }
     async function getCategory() {
         try {
-            const res = await request.get("category");
-            setCategory(res.data.data);
+            const { data } = await request.get("category");
+            setCategory(data.data);
         } catch (error) {
             toast.error("No Category");
         }
@@ -87,9 +89,9 @@ const HomePage = () => {
                 {data.map((el) => (
                     <div key={el._id} className="container">
                         <div className={style["wrapper"]}>
-                            <h6 className={style['wrapper__h6']}>Posted on <span className={style['h6__span']}>{el.category.name}</span></h6>
-                            <h1 className={style['wrapper__heading']}>{el.category.name}, {el.category.description.slice(0, 50)}</h1>
-                            <h5 className={style['wrapper__span']}>By <span className={style['name']}>{el.user.first_name} {el.user.last_name}</span> | {new Date(el.category.updatedAt).toLocaleDateString(
+                            <h6 className={style['wrapper__h6']}>Posted on <span className={style['h6__span']}>{el.category?.name}</span></h6>
+                            <h1 className={style['wrapper__heading']}>{el.category?.name}, {el.category?.description}</h1>
+                            <h5 className={style['wrapper__span']}>By <span className={style['name']}>{el.user?.first_name} {el.user?.last_name}</span> | {new Date(el.category?.updatedAt).toLocaleDateString(
                                 undefined,
                                 {
                                     year: "numeric",
@@ -97,7 +99,7 @@ const HomePage = () => {
                                     day: "numeric",
                                 }
                             )}</h5>
-                            <p className={style['wrapper__title']}>{el.category.description}</p>
+                            <p className={style['wrapper__title']}>{el.category?.description}</p>
                             <Link to={"/blog/" + el._id} className={style['wrapper__btn']}>Read More {'>'}</Link>
                         </div>
                     </div>

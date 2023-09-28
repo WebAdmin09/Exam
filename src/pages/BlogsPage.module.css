@@ -1,0 +1,25 @@
+.all__posts {
+    margin-top: 64px;
+}
+
+.search__input {
+    border-radius: 2px;
+    border: 1px solid rgba(109, 110, 118, 0.50);
+    display: flex;
+    max-width: 1280px;
+    padding: 15px;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.heading {
+    margin-top: 54px;
+    color: var(--Black, #232536);
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 64px;
+    letter-spacing: -2px;
+    margin-bottom: 20px;
+}
