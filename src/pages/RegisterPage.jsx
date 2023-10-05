@@ -1,10 +1,11 @@
 import style from './RegisterPage.module.css'
 const RegisterPage = () => {
+    
     return (
         <section>
             <div className="container">
                 <div className={style["wrapper"]}>
-                    <h1 className={style["heading__login"]}>Login</h1>
+                    <h1 className={style["heading__login"]}>Register</h1>
                     <form className={style["form"]}>
                         <input
                             type="text"
